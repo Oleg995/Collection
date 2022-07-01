@@ -1,10 +1,7 @@
 import java.lang.reflect.Array;
+import java.util.*;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class ArrayCollection<T> implements Collection<T> {
     private T[] m = (T[])new Object[1];
@@ -95,12 +92,13 @@ public class ArrayCollection<T> implements Collection<T> {
 
     @Override
     public boolean retainAll(Collection<?> collection) {
-        for (final Object elements: this) {
-            if (!collection.contains(elements)) {
-                this.remove(elements);
-                this.size--;
+        for (int i = 0; i < size; i++) {
+            if (!collection.contains(m[i])) {
+                remove(m[i--]);
+                System.out.println(Arrays.toString(m));
             }
         }
+
         return true;
     }
 
